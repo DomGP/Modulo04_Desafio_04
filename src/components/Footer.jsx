@@ -9,12 +9,9 @@ const Footer = () => {
             <Toolbar>
                 <Box flexGrow={1}>
                     <Typography variant="body1" color="inherit">
-                        © 2024 Mi Sitio Web. Todos los derechos reservados.
+                        © 2024 PokeApi
                     </Typography>
                 </Box>
-                <Typography variant="body2" color="inherit">
-                    Política de privacidad
-                </Typography>
             </Toolbar>
         </AppBar>
     );
