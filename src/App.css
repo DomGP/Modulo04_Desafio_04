@@ -1,0 +1,14 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+}
+
+#content {
+  flex-grow: 1; /* Esto permite que el contenido ocupe todo el espacio restante */
+}
+
+footer {
+  flex-shrink: 0; /* Evita que el pie de página se encoja si hay poco contenido */
+}

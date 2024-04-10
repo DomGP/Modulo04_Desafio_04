@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  height: 100vh;;
+ /*  display: flex;
+  place-items: center;
+  min-width: 320px; */
+}
+.cardsStyle{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5em;
+}
