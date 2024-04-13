@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 
 import Buscador from "./Buscador"
 import Cards from './Cards'
+import Boton from "./Boton";
 
 //Para crear una componente que muestre datos consumidos de una API necesitamos:
 //1. Una función que nos devuelva los resultados de la API.
@@ -13,9 +14,10 @@ const MiApi = () => {
     // 3. Info guardara los valores traídos desde la API
     const [pokemones, setPokemones] = useState([]);
     const [busquedaPokemon, setBusquedaPokemon] = useState('')
+    const [orden, setOrden] = useState(true)
 
-   // Función para capitalizar la primera letra de una cadena
-   const capitalizeFirstLetter = (string) => {
+    // Función para capitalizar la primera letra de una cadena
+    const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
     // 2. Llamamos a la función consultarApi al momento de montar el componente
@@ -56,7 +58,8 @@ const MiApi = () => {
                 return {
                     name:capitalizeFirstLetter(newData.name),
                     imageUrl: newData.sprites.front_shiny,
-                    type:type
+                    type:type,
+                    id: newData.id
                     /* imageUrl:newData.sprites.versions['generation-i']['red-blue'].front_default, */
                 }
             }));
@@ -77,12 +80,35 @@ const MiApi = () => {
     const buscar = (busquedaPokemon) =>{
         setBusquedaPokemon(busquedaPokemon)
     }
+
+    const reversePokemones = () => {
+        setPokemones([...pokemones].reverse());
+        setOrden(!orden);
+      };
+    
+      const resetOrder = () => {
+        setPokemones([...pokemones].reverse());
+        setOrden(true);
+      };
+
+      const click = () => {
+        if (orden){
+            reversePokemones();
+        } else{
+            resetOrder();
+        }
+      }
+    
         
     return (
         <>
             <Buscador
                 busquedaPokemon={busquedaPokemon}
-                setBusquedaPokemon = {buscar}/>
+                setBusquedaPokemon = {buscar}
+                />
+            <Boton 
+                onClick={click}
+                label={orden ? 'Revertir Orden' : 'Restaurar Orden'}/>
             <div className="cardsStyle">
             {pokemones && pokemones.length > 0 ?
                 pokemones.filter(pokemon => pokemon.name.toLowerCase().includes(busquedaPokemon.toLocaleLowerCase())).map((pokemon, index) => (
@@ -91,7 +117,7 @@ const MiApi = () => {
                         >
 
                             <Cards
-                            titleNumber={index + 1}
+                            titleNumber={pokemon.id}
                             titleCard={pokemon.name}
                             imageCard={pokemon.imageUrl} 
                             titleType={pokemon.type}/>
