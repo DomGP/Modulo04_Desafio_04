@@ -14,10 +14,12 @@ function App() {
     <>
       <div id="root">
         <div id="content">
-          <NavBar />
+          <NavBar 
+            navBarTitle = 'POKEAPI'/>
           <MiApi />
         </div>
-        <Footer />
+        <Footer 
+          footerText = '© 2024 PokeApi'/>
     </div>
     </>
   )

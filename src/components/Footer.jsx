@@ -3,13 +3,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-const Footer = () => {
+const Footer = ({footerText}) => {
     return (
         <AppBar position="static" color="error">
             <Toolbar>
                 <Box flexGrow={1}>
                     <Typography variant="body1" color="inherit">
-                        © 2024 PokeApi
+                        {footerText}
                     </Typography>
                 </Box>
             </Toolbar>

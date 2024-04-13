@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 
-const NavBar = () => {
+const NavBar = ({navBarTitle}) => {
     const pages = ['Pokemones', 'Opening'];
     const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -52,7 +52,7 @@ const NavBar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        POKEAPI
+                        {navBarTitle}
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
