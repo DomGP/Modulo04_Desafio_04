@@ -7,7 +7,7 @@ const Buscador = ({busquedaPokemon, setBusquedaPokemon}) => {
         <Box
             component="form"
             sx={{
-            '& > :not(style)': { m:2, mt:3, width: '30ch' },
+            '& > :not(style)': { m:2, mt:3, width: '30ch'},
             }}
             noValidate
             autoComplete="off"

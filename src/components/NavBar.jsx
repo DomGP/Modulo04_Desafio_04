@@ -31,7 +31,9 @@ const NavBar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar 
+            position="static"
+            color='error'>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <CatchingPokemonIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

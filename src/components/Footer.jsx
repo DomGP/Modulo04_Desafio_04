@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 const Footer = () => {
     return (
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color="error">
             <Toolbar>
                 <Box flexGrow={1}>
                     <Typography variant="body1" color="inherit">
