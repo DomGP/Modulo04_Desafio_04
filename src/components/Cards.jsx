@@ -5,23 +5,23 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 
-const Cards = ({titleCard,subtitleCard,imageCard,titleNumber }) => {
+const Cards = ({titleCard,subtitleCard,imageCard,titleNumber,titleType }) => {
 
   return (
     <Card 
-        sx={{ maxWidth: 350, mt:3, ml:3, mb:3 }}>
+        sx={{ width:300, maxWidth: 350, my:2, mb:3 }}>
       <CardHeader
         title={['N°', titleNumber, ' - ', titleCard]}
         subheader={subtitleCard}
       />
       <CardMedia
         component="img"
-        height="200"
+        height="300"
         image={imageCard}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          
+          Tipo: {titleType}
         </Typography>
       </CardContent>
     </Card>

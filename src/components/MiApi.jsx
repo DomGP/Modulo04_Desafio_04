@@ -28,13 +28,35 @@ const MiApi = () => {
                 const newResponse = await fetch(pokemon.url);
                 const newData = await newResponse.json();
 
-                // Aquí cambiamos la ruta para obtener la imagen de Red-Blue
+                const tipoTraduccion = {
+                    "normal": "normal",
+                    "fire": "fuego",
+                    "water": "agua",
+                    "electric": "eléctrico",
+                    "grass": "planta",
+                    "ice": "hielo",
+                    "fighting": "lucha",
+                    "poison": "veneno",
+                    "ground": "tierra",
+                    "flying": "volador",
+                    "psychic": "psíquico",
+                    "bug": "bicho",
+                    "rock": "roca",
+                    "ghost": "fantasma",
+                    "dragon": "dragón",
+                    "dark": "siniestro",
+                    "steel": "acero",
+                    "fairy": "hada"
+                };
+
+                const type = newData.types.map(type => capitalizeFirstLetter(tipoTraduccion[type.type.name])).join(', ')
                 
 
 
                 return {
                     name:capitalizeFirstLetter(newData.name),
-                    imageUrl: newData.sprites.front_shiny
+                    imageUrl: newData.sprites.front_shiny,
+                    type:type
                     /* imageUrl:newData.sprites.versions['generation-i']['red-blue'].front_default, */
                 }
             }));
@@ -71,7 +93,8 @@ const MiApi = () => {
                             <Cards
                             titleNumber={index + 1}
                             titleCard={pokemon.name}
-                            imageCard={pokemon.imageUrl} />
+                            imageCard={pokemon.imageUrl} 
+                            titleType={pokemon.type}/>
                     </div>
                 ))
             
