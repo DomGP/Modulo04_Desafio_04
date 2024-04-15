@@ -23,13 +23,19 @@ const MiApi = () => {
     // 2. Llamamos a la función consultarApi al momento de montar el componente
     const consultarApi = async () => {
         try{
+            //HACE LA SOLICITUD DE LA API
             let response = await fetch ('https://pokeapi.co/api/v2/pokemon?limit=151')
+            //CONVIERTE LOS DATOS EN FORMATO JSON
             let data = await response.json()
 
+            //MAPEA LOS DATOS PARA OBTENER DETALLES DE CADA POKEMON
             const detallesPokemones = await Promise.all(data.results.map(async(pokemon) => {
+                //SE REALIZA UNA SOLICITUD A CADA URL DE CADA POKEMON
                 const newResponse = await fetch(pokemon.url);
+                //SE CONVIERTEN EN FORMATO JSON
                 const newData = await newResponse.json();
 
+                //OBJETO QUE MAPEA LOS TIPOS DE POKEMON DE INGLES A ESPAÑOL
                 const tipoTraduccion = {
                     "normal": "normal",
                     "fire": "fuego",
@@ -51,6 +57,7 @@ const MiApi = () => {
                     "fairy": "hada"
                 };
 
+                //HACE UN MAPEO PARA TRAER TODOS LOS TIPOS DE CADA POKEMON, ADEMÁS DE SEPRARLOS POR UNA COMA Y UN ESPACIO
                 const type = newData.types.map(type => capitalizeFirstLetter(tipoTraduccion[type.type.name])).join(', ')
                 
 
@@ -63,7 +70,7 @@ const MiApi = () => {
                     /* imageUrl:newData.sprites.versions['generation-i']['red-blue'].front_default, */
                 }
             }));
-
+            //ACTUALIZA EL ESTADO POKEMONES CON LA INFO OBTENIDA
             setPokemones(detallesPokemones)
             
         }catch(error){
@@ -72,26 +79,30 @@ const MiApi = () => {
         
     }
     
+    //PARA REALIZAR SOLO UN LLAMADO A LA API
     useEffect(() => {
         consultarApi();
     }, [])
 
-    //FILTRO BUSQUEDA
+    //FILTRO BUSQUEDA => ACTUALIZA EL ESTADO BUSQUEDAPOKEMON CON EL VALOR INGRESADO EN EL INPUT
     const buscar = (busquedaPokemon) =>{
         setBusquedaPokemon(busquedaPokemon)
     }
 
+    //REVERSE => CREA UNA COPIA DEL ARRAY, E INVIERTE EL ORDEN DE ESA COPIA Y ACTUALIZA EL ESTADO DE LOS POKEMONES A ESE NUEVO ORDEN
+
     const reversePokemones = () => {
         setPokemones([...pokemones].reverse());
-        setOrden(!orden);
-      };
+        setOrden(false);
+    };
     
-      const resetOrder = () => {
+    const resetOrder = () => {
         setPokemones([...pokemones].reverse());
         setOrden(true);
-      };
+    };
 
-      const click = () => {
+    //CONTROLA EL COMPORTAMIENTO DEL BOTON
+    const click = () => {
         if (orden){
             reversePokemones();
         } else{
